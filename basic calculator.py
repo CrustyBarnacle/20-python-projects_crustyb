@@ -1,44 +1,77 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------
+# Created By  : Mario Burgos
+# Tutorial: https://github.com/tomitokko/20-python-projects
+# Youtube: https://youtu.be/pdy3nh1tn6I
+# Created Date: Fri Sep 10 2022
+# version ='1.0'
+
+
+# Calculation functions
 def add(a, b):
-    answer = a + b
-    print(str(a) + " + " + str( b) + " = " + str(answer) + "\n")
-def sub(a, b):
-    answer = a - b
-    print(str(a) + " - " + str(b ) + " = " + str(answer) + "\n")
-def mul(a, b):
-    answer = a*b
-    print(str(a) + " * " + str(b) + " = " + str(answer) + "\n")
-def div(a, b):
-    answer = a / b
-    print(str(a) + " / " + str(b) + " = " + str(answer) + "\n")
+    print(f"{a} + {b} = {a + b}\n")
+
+def multiply(a, b):
+    print(f"{a} x {b} = {a * b}\n")
+
+def subtract(a, b):
+    print(f"{a} - {b} = {a - b}\n")
+
+def divide(a, b):
+    print(f"{a} / {b} = {a // b}r{a % b}\n")
+
+
+# Help - choices
+def output_help():
+    operation_choices = """
+    A. Addition
+    B. Subtraction
+    C. Multiplication
+    D. Division
+    Q. Quit
+    """
+    print(operation_choices)
+
+# User Input
+def get_choice():
+    choice = "z" # Use do while and no need for initializing choice?
+    while choice not in ['a','b','c','d','q']:
+        output_help()
+        choice = input(f"Operation to use: ")
+
+        if choice.lower() == "q":
+            print("Quitting calculator...")
+            quit()
+
+    return choice
+
+
+def get_numbers():
+    a = int(input("First number: "))
+    b = int(input("Second number: "))
+
+    return a, b
+
+
+# Using chosen operation and numbers, output result
+
+def get_result(operation, a, b):
+    match operation.lower():
+
+        case "a":
+            add(a, b)
+        case "b":
+            subtract(a, b)
+        case "c":
+            multiply(a, b)
+        case "d":
+            divide(a, b)
+
+
+# Get choice of operation, numbers, calculate and output result
 
 while True:
-    print("A. Addition")
-    print("B. Subtraction")
-    print("C. Multiplication")
-    print("D. Division")
-    print("E. Exit")
-    choice = input("input your choice: ")
-
-    if choice == "a" or choice == "A":
-        print("Addition")
-        a = int(input("input first number: "))
-        b = int(input("input second number: "))
-        add(a, b)
-    elif choice == "b" or choice == "B":
-        print("Subtraction")
-        a = int(input("input first number:"))
-        b = int(input("input second number: "))
-        sub(a, b)
-    elif choice == "c" or choice == "C":
-        print("Multiplication")
-        a = int(input("input first number:"))
-        b = int(input("input second number: "))
-        mul(a, b)
-    elif choice == "d" or choice == "D":
-        print("Division" )
-        a = int(input("input first number:"))
-        b = int(input("input second number: "))
-        div(a, b)
-    elif choice == "e" or choice == "E":
-        print("program ended")
-        quit()
+    operation = get_choice()
+    a, b = get_numbers()
+    get_result(operation, a, b)
