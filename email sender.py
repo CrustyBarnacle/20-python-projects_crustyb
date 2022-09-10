@@ -1,26 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------
+# Created By  : Mario Burgos
+# Tutorial: https://github.com/tomitokko/20-python-projects
+# Youtube: https://youtu.be/pdy3nh1tn6I
+# Created Date: Fri Sep  9 03:18:01 PM PDT 2022
+# version ='1.0'
+
+## TODO: Import crecentials from ENV Variables:
+## Environmet variables preferred: https://medium.com/geekculture/how-to-protect-your-credentials-using-environment-variables-with-python-25e6cb4d135c
+
+## credentials.py
+## app_password = "<application_password>"
+
 from email.message import EmailMessage
-from app2 import password
+from credentials import app_password # Import from credentials.py
 import ssl
 import smtplib
 
-email_sender = ' codewithtomi@gmail.com'
-email_password = password
-email_receiver = ''
 
-subject = "Dont forget to subscribe"
-body = """
-When you watch a video, please hit subscribe
-"""
+sender = '<myemail@emailhost.com>'
+password = app_password
+receiver = input("Send email to: ")
+subject = input("Subject: ")
+body = input("Message to send: ")
 
-em = EmailMessage()
-em['From'] = email_sender
-em['To'] = email_receiver
-em[' subject'] = subject
-em.set_content(body)
-
+email_message = EmailMessage()
+email_message['From'] = sender
+email_message['To'] = receiver
+email_message['Subject'] = f"Sent with Python: {subject}" # Add a subject prefix
+email_message.set_content(body)
 
 context = ssl.create_default_context()
 
-with smtplib.SMTP_SSL( 'smtp.gmail.com' , 465, context=context) as smtp:
-    smtp.login(email_sender, email_password)
-    smtp.sendmail(email_sender, email_receiver, em.as_string())
+with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+    try:
+        smtp.login(sender, password)
+        smtp.sendmail(sender, receiver, email_message.as_string())
+        print(f"Message sent...\n\n{email_message}")
+    except smtplib.SMTPAuthenticationError as error:
+        print("Error: Username and Password not accepted.")
