@@ -9,6 +9,8 @@
 
 ## TODO: Import crecentials from ENV Variables:
 ## Environmet variables preferred: https://medium.com/geekculture/how-to-protect-your-credentials-using-environment-variables-with-python-25e6cb4d135c
+## https://www.realpythonproject.com/3-ways-to-store-and-read-credentials-locally-in-python/
+## https://www.dotenv.org/docs/security/env
 
 ## credentials.py
 ## app_password = "<application_password>"
