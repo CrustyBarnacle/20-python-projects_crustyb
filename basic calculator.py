@@ -19,7 +19,10 @@ def subtract(a, b):
     print(f"{a} - {b} = {a - b}\n")
 
 def divide(a, b):
-    print(f"{a} / {b} = {a // b}r{a % b}\n")
+    try:
+        print(f"{a} / {b} = {a // b}r{a % b}\n")
+    except ZeroDivisionError as error:
+        print(f"Error: {error}")
 
 
 # Help - choices
@@ -39,10 +42,21 @@ def get_choice():
     while choice not in ['a','b','c','d','q']:
         output_help()
         choice = input(f"Operation to use: ")
+        choice = choice.lower()
 
-        if choice.lower() == "q":
+        if choice == "q":
             print("Quitting calculator...")
             quit()
+
+    match choice:
+        case "a":
+            print("Addition")
+        case "b":
+            print("Subtraction")
+        case "c":
+            print("Multiplication")
+        case "d":
+            print("Division")
 
     return choice
 
@@ -58,7 +72,6 @@ def get_numbers():
 
 def get_result(operation, a, b):
     match operation.lower():
-
         case "a":
             add(a, b)
         case "b":
