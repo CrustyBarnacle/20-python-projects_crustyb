@@ -17,6 +17,8 @@
 def main():
     print("Welcome to the email slicer.\n")
 
+    # def get_address() to verify email address format (regex only, not the smtplib section)
+    # https://stackoverflow.com/questions/22233848/how-to-verify-an-email-address-in-python-using-smtplib
     email_address = input(" Enter your email address: ")
     username, domain, tld = split_parts(email_address)
     display_parts(username, domain, tld)
