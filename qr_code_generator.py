@@ -11,7 +11,7 @@
 # Function to get text/URI and convert to QR Code
 # Save QR Code as image
 
-import qrcode
+import qrcode # https://github.com/lincolnloop/python-qrcode
 
 
 def generate_qrcode(text, filename):
@@ -23,12 +23,18 @@ def generate_qrcode(text, filename):
     border=4,
     )
 
-    qr.add_data(text)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color="black", back_color="white")
-    img.save(f"{filename}.png")
+    try:    
+        qr.add_data(text)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save(f"{filename}.png")
+        print(f"QR Code {filename}.png created.")
+
+    except ValueError as error:
+        print(f"Error: {error}")
 
 
+# Get user input and generate QR Code image
 qr_input = input(" Enter URI or text: ") # Text for QR Code
 qr_name = input(" Name to save file as (*.png): ") # Filename for image
 generate_qrcode(qr_input, qr_name) # Generate QR Code using user input
