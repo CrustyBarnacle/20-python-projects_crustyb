@@ -1,3 +1,5 @@
+# https://www.dotenv.org/docs/security/env
+
 from dotenv import load_dotenv
 import os
 
