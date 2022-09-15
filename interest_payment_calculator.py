@@ -34,8 +34,8 @@ def main():
     interest, payment = monthly_payment(principal, apr, years)
 
     print(f"""
- Monthly payment: {payment}
- (Includes) monthly interst of: {interest}
+ Monthly payment: ${payment:.2f}
+ (Includes) monthly interst of: ${interest:.2f}
  """)
 
 
