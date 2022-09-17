@@ -1,30 +1,42 @@
-import string
-import random
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------
+# Created By  : Mario Burgos
+# Tutorial: https://github.com/tomitokko/20-python-projects
+# Youtube: https://youtu.be/pdy3nh1tn6I
+# Created Date: Sat Sep 17 2022
+# version ='1.0'
 
-characters = list(string.ascii_letters + string.digits + " !@#$%^&*()")
+# Request password length
+# Generate password
+# TODO: update to use secrets
+
+
+import random
+import string
+#import secrets
+
+
+characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
 
 def generate_password():
-    password_length = int(input("How long would you like your password to be? "))
-    
-    random.shuffle(characters)
-    
     password = []
     
-    for x in range(password_length):
+    password_length = int(input(" Length of password: "))
+
+    random.shuffle(characters)
+
+    for i in range(password_length):
         password.append(random.choice(characters))
     
-    random.shuffle(password)
+    password = "".join(password)
     
-    password = "" .join(password)
-    print(password)
+    return password
 
-option = input("Do you want to generate a password? (Yes/No): ")
 
-if option == "Yes":
-    generate_password()
-elif option == "No":
-    print("Program ended")
-    quit()
-else:
-    print("Invalid input, please input Yes or No")
-    quit()
+def main():
+    password = generate_password()
+    print(f"New random password: {password}")
+
+
+main()
